@@ -143,8 +143,8 @@ const webpackPlugins = ENV === "production" ? [
 	new V8LazyParseWebpackPlugin(),
 	uglifyPlugin,
 	hiddenErrorPlugin,
-	// offlinePlugin,
-	// extractCssPlugin,
+	offlinePlugin,
+	extractCssPlugin,
 	htmlTplPlugin
 ] : [new DashboardPlugin(), htmlTplPlugin];
 
@@ -186,10 +186,6 @@ module.exports = {
 			loader: ENV === 'production' ? 'file-loader' : 'url-loader'
 		}]
 	},
-
-  // postcss: function() {
-  //   return [px2rem({remUnit: 20})];
-  // },
 
 	resolve: {
 		extensions: ['.jsx', '.js', '.json'],
