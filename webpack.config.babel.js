@@ -14,7 +14,10 @@ const ENV = process.env.NODE_ENV || "development";
 const htmlTplPlugin = new HtmlWebpackPlugin({
 	template: './index.ejs',
 	minify: {
-		collapseWhitespace: true
+		collapseWhitespace: true,
+		minifyJS: true,
+		minifyCSS: true,
+		removeComments: true
 	}
 });
 
