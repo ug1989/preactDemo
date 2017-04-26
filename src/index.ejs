@@ -24,21 +24,23 @@
 	<link rel="icon" type="image/png" href="/assets/icons/favicon-16x16.png" sizes="16x16">
 	<link rel="manifest" href="./manifest.json">
 	<script>
-		var scale = 1 / (window.devicePixelRatio || '1');
-		var metaEl = document.querySelector('meta[name="viewport"]');
-		metaEl.setAttribute('name', 'viewport');
-		metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no, minimal-ui');
-		window.addEventListener('resize', setBaseFont);
-		setBaseFont();
-		function setBaseFont() {
-			var limitClientWidth = document.documentElement.clientWidth;
-			limitClientWidth = limitClientWidth > 420 ? 420 : limitClientWidth;
-			var baseFontSize = limitClientWidth / 750 * 40; // iphone6 : 1rem => 20px;
-			document.documentElement.style.fontSize = baseFontSize + 'px';
-		}
-		// this is a comment
+		(function() {
+			var scale = 1 / (window.devicePixelRatio || 1);
+			var metaEl = document.querySelector('meta[name="viewport"]');
+			metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no, minimal-ui');
+			setBaseFont();
+			window.addEventListener('resize', setBaseFont);
+			function setBaseFont() {
+				var docEle = document.documentElement;
+				var limitWidth = 420 / scale;
+				var clientWidth = docEle.clientWidth;
+				var baseFontSize = (clientWidth > limitWidth ? limitWidth : clientWidth) / 750 * 40; // iphone6 : 1rem => 20px;
+				docEle.style.fontSize = baseFontSize + 'px';
+			}
+		})();
+		// test js comment
 	</script>
 </head>
-<!-- STMDSD -->
+<!-- test html comment -->
 <body></body>
 </html>
