@@ -31,7 +31,9 @@
 		window.addEventListener('resize', setBaseFont);
 		setBaseFont();
 		function setBaseFont() {
-			var baseFontSize = document.documentElement.clientWidth / 750 * 40; // iphone6 : 1rem => 20px;
+			var limitClientWidth = document.documentElement.clientWidth;
+			limitClientWidth = limitClientWidth > 420 ? 420 : limitClientWidth;
+			var baseFontSize = limitClientWidth / 750 * 40; // iphone6 : 1rem => 20px;
 			document.documentElement.style.fontSize = baseFontSize + 'px';
 		}
 		// this is a comment
