@@ -34,8 +34,8 @@
 				var docEle = document.documentElement;
 				var limitWidth = 420 / scale;
 				var clientWidth = docEle.clientWidth;
-				var baseFontSize = (clientWidth > limitWidth ? limitWidth : clientWidth) / 750 * 40; // iphone6 : 1rem => 20px;
-				docEle.style.fontSize = baseFontSize + 'px';
+				var baseFontSize = (clientWidth > limitWidth ? limitWidth : clientWidth) / 750 * 40;
+				docEle.style.fontSize = baseFontSize + 'px'; // iphone6 : 1rem => 20px;
 			}
 		})();
 		// test js comment

@@ -1,5 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
+import px2rem from 'postcss-px2rem';
+import autoprefixer from 'autoprefixer';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
@@ -101,6 +103,15 @@ const extractCssLoader = ExtractTextPlugin.extract({
 	fallback: "style-loader"
 });
 
+const px2remOption = {
+	plugins: () => {
+		return [px2rem({
+			remUnit: 40,
+			remPrecision: 2
+		}), autoprefixer];
+	}
+};
+
 const inlineCssloader = [{
 	loader: "style-loader"
 }, {
@@ -109,17 +120,19 @@ const inlineCssloader = [{
 		module: true
 	}
 }, {
-	loader: "postcss-loader"
+	loader: "postcss-loader",
+	options: px2remOption
 }, {
 	loader: "less-loader"
 }];
 
-const _inlineCssloader = [{
+const extraCssloader = [{
 	loader: "style-loader"
 }, {
 	loader: "css-loader"
 }, {
-	loader: "postcss-loader"
+	loader: "postcss-loader",
+	options: px2remOption
 }, {
 	loader: "less-loader"
 }];
@@ -161,7 +174,7 @@ module.exports = {
 		}, {
 			test: /\.(less|css)$/,
 			exclude: [path.resolve(__dirname, 'src/components')],
-			use: _inlineCssloader
+			use: extraCssloader
 		}, {
 			test: /\.json$/,
 			loader: 'json-loader'
@@ -173,6 +186,10 @@ module.exports = {
 			loader: ENV === 'production' ? 'file-loader' : 'url-loader'
 		}]
 	},
+
+  // postcss: function() {
+  //   return [px2rem({remUnit: 20})];
+  // },
 
 	resolve: {
 		extensions: ['.jsx', '.js', '.json'],
