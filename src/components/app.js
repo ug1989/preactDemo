@@ -11,6 +11,12 @@ const loadComponent = (url, cb) => {
 	});
 }
 
+const appContainerStyle = {
+	width: '100%',
+	height: '100%',
+	overflow: 'hidden'
+};
+
 export default class App extends Component {
 	/** Gets fired when the route changes.
 	 *	@param {Object} event		"change" event from [preact-router](http://git.io/preact-router)
@@ -28,7 +34,7 @@ export default class App extends Component {
 
 	render() {
 		return (
-			<div id="app" style={{height: '100%'}}>
+			<div id="app" style={appContainerStyle}>
 				<Header />
 				<Router hashHistory={true} onChange={false && this.handleRoute}>
 					<Home path="/" />

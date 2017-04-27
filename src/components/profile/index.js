@@ -2,8 +2,8 @@ import { h, Component } from 'preact';
 import style from './style.less';
 
 // google-material-design-lite
-// import { Button } from 'preact-mdl';
-// import "material-design-lite";
+import { Button } from 'preact-mdl';
+import "material-design-lite";
 // import "material-design-lite/dist/material.indigo-pink.min.css";
 
 export default class Profile extends Component {
@@ -37,9 +37,8 @@ export default class Profile extends Component {
 		return (
 			<div class={style.profile}>
 				<h1>Profile: {user}</h1>
-				{/* <Button></Button> */}
+				<Button>{time}</Button>
 				<p>This is the user profile for a user named {user}.</p>
-				<div>Current time: {time}</div>
 				<div>Profile route mounted {count} times.</div>
 			</div>
 		);

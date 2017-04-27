@@ -11,10 +11,11 @@ import OfflinePlugin from 'offline-plugin';
 import DashboardPlugin from 'webpack-dashboard/plugin';
 import V8LazyParseWebpackPlugin from 'v8-lazy-parse-webpack-plugin';
 
-const ENV = process.env.NODE_ENV || "development";
+const forBuild = process.env.NODE_ENV === "production";
 
 const htmlTplPlugin = new HtmlWebpackPlugin({
 	template: './index.ejs',
+	title: 'Custom template',
 	minify: {
 		collapseWhitespace: true,
 		minifyJS: true,
@@ -25,7 +26,7 @@ const htmlTplPlugin = new HtmlWebpackPlugin({
 
 const extractCssPlugin = new ExtractTextPlugin({
 	filename: "[name].[contenthash:6].css",
-	disable: ENV === "development"
+	disable: !forBuild
 });
 
 const copyFilePlugin = new CopyWebpackPlugin([{
@@ -56,15 +57,14 @@ const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
 
 const devConfig = {
 	port: process.env.PORT || 8080,
-	host: '127.0.0.1',
+	host: '0.0.0.0',
 	colors: true,
 	compress: true,
 	publicPath: '/',
 	contentBase: './src',
-	hot: true,
+	filename: 'app.js',
 	historyApiFallback: true,
-	open: true,
-	proxy: { // proxy URLs to backend development server
+	proxy: {
 		'/api': 'http://localhost:3000'
 	},
 };
@@ -123,6 +123,11 @@ const inlineCssloader = [{
 	loader: "postcss-loader",
 	options: px2remOption
 }, {
+	loader: "resolve-url-loader",
+	options: {
+		sourceMap: true
+	}
+},{
 	loader: "less-loader"
 }];
 
@@ -137,35 +142,38 @@ const extraCssloader = [{
 	loader: "less-loader"
 }];
 
-const webpackPlugins = ENV === "production" ? [
+const webpackPlugins = forBuild ? [
 	cleanPlugin,
 	copyFilePlugin,
-	new V8LazyParseWebpackPlugin(),
 	uglifyPlugin,
 	hiddenErrorPlugin,
 	offlinePlugin,
 	extractCssPlugin,
 	htmlTplPlugin
-] : [new DashboardPlugin(), htmlTplPlugin];
+] : [
+	new DashboardPlugin(),
+	new V8LazyParseWebpackPlugin(),
+	htmlTplPlugin
+];
 
 module.exports = {
 	context: path.resolve(__dirname, "src"),
 
 	entry: {
-		app: "./index.js"
+		app: "./index.js",
 	},
 
 	output: {
 		path: path.resolve(__dirname, "build"),
 		publicPath: "/",
-		filename: "[name].[chunkhash:6].js",
+		filename: "static/[name].[chunkhash:6].js",
 	},
 
 	module: {
 		rules: [{
 			test: /\.jsx?$/,
 			exclude: ["node_modules"],
-			loader: 'babel-loader',
+			use: ['react-hot-loader', 'babel-loader']
 		}, {
 			test: /\.(less|css)$/,
 			include: [path.resolve(__dirname, 'src/components')],
@@ -183,7 +191,13 @@ module.exports = {
 			loader: 'raw-loader'
 		}, {
 			test: /\.(svg|woff2?|ttf|eot|jpe?g|png|gif)(\?.*)?$/i,
-			loader: ENV === 'production' ? 'file-loader' : 'url-loader'
+			use: {
+				loader: 'url-loader',
+				options: {
+					limit: 51200,
+					name: 'static/[sha512:hash:base64:12].[ext]'
+				}
+			}
 		}]
 	},
 

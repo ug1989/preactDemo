@@ -8,7 +8,7 @@
 		<link rel="preload" href="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>" as="script">
 	<% } %>
 	<meta charset="utf-8">
-	<title>preact-boilerplate</title>
+	<title><%= htmlWebpackPlugin.options.title %></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 	<meta name="description" content="preact-boilerplate">
 	<meta name="msapplication-TileColor" content="#673ab8">
@@ -27,15 +27,15 @@
 		(function() {
 			var scale = 1 / (window.devicePixelRatio || 1);
 			var metaEl = document.querySelector('meta[name="viewport"]');
-			metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no, minimal-ui');
+			metaEl.setAttribute('content', 'width=device-width, initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no, minimal-ui');
 			setBaseFont();
 			window.addEventListener('resize', setBaseFont);
 			function setBaseFont() {
 				var docEle = document.documentElement;
 				var limitWidth = 420;
 				var clientWidth = docEle.clientWidth;
-				var baseFontSize = (clientWidth * scale > limitWidth ? limitWidth : clientWidth * scale) / 750 * 40;
-				docEle.style.fontSize = (baseFontSize / scale) + 'px'; // iphone6 : 1rem => 20px;
+				window._baseFontSize = (clientWidth * scale > limitWidth ? limitWidth : clientWidth * scale) / 750 * 40;
+				docEle.style.fontSize = (_baseFontSize / scale) + 'px'; // iphone6 : 1rem => 20px;
 			}
 		})();
 		// test js comment
