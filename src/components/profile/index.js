@@ -4,7 +4,7 @@ import style from './style.less';
 // google-material-design-lite
 import { Button } from 'preact-mdl';
 import "material-design-lite";
-// import "material-design-lite/dist/material.indigo-pink.min.css";
+import "material-design-lite/dist/material.indigo-pink.min.css";
 
 export default class Profile extends Component {
 	state = {
