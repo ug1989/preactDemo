@@ -28,8 +28,8 @@ export default class App extends Component {
 
 	componentDidMount() {
 		setTimeout(() => {
-			// loadComponent('/profile');
-		}, 2000);
+			loadComponent('/profile');
+		}, 5000);
 	}
 
 	render() {

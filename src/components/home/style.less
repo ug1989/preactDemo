@@ -1,4 +1,14 @@
 @import '~style/helpers';
+@images: '../home/images';
+
+@base: #f04615;
+@width: 0.5;
+
+.class {
+  width: percentage(@width); // returns `50%`
+  color: saturate(@base, 5%);
+  background-color: spin(lighten(@base, 25%), 8);
+}
 
 .home {
 	padding: 100px 20px 56px;
@@ -20,6 +30,6 @@
 	border-top-right-radius: 75% 25%;
 	border-bottom-left-radius: 75% 25%;
 	border-bottom-right-radius: 25% 75%;
-	background-image: url('../home/images/bg.png');
+	background-image: url('@{images}/bg.png');
 	background-size: cover;
 }

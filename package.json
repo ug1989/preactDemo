@@ -8,8 +8,6 @@
     "prestart": "npm run build",
     "build": "cross-env NODE_ENV=production webpack -p --progress",
     "prebuild": "mkdirp build && ncp src/assets build/assets",
-    "test": "npm run -s lint && jest --coverage",
-    "test:watch": "npm run -s test -- --watch",
     "lint": "eslint src test"
   },
   "keywords": [
@@ -103,6 +101,7 @@
     "serve": "^5.1.4",
     "sw-precache-webpack-plugin": "^0.9.1",
     "to-string-loader": "^1.1.5",
+    "unfetch": "^2.1.2",
     "webpack-dashboard": "^0.4.0"
   }
 }

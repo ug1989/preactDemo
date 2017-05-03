@@ -57,7 +57,7 @@ const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
 
 const devConfig = {
 	port: process.env.PORT || 8080,
-	// host: '0.0.0.0',
+	host: '0.0.0.0',
 	colors: true,
 	compress: true,
 	publicPath: '/',
