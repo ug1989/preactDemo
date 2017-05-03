@@ -106,8 +106,8 @@ const extractCssLoader = ExtractTextPlugin.extract({
 const px2remOption = {
 	plugins: () => {
 		return [px2rem({
-			remUnit: 40,
-			remPrecision: 2
+			remUnit: 20,
+			remPrecision: 5
 		}), autoprefixer];
 	}
 };
@@ -194,7 +194,7 @@ module.exports = {
 			use: {
 				loader: 'url-loader',
 				options: {
-					limit: 51200,
+					limit: 5120,
 					name: 'static/[sha512:hash:base64:12].[ext]'
 				}
 			}

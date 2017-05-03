@@ -8,8 +8,6 @@ export default class Home extends Component {
 	render() {
 		return (
 			<div class={style.home}>
-				<h1>Home</h1>
-				<p>This is home Component</p>
 				<div class={style.cycle}></div>
 			</div>
 		);
