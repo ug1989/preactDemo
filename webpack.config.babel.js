@@ -57,7 +57,7 @@ const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
 
 const devConfig = {
 	port: process.env.PORT || 8080,
-	host: '0.0.0.0',
+	// host: '0.0.0.0',
 	colors: true,
 	compress: true,
 	publicPath: '/',
@@ -173,7 +173,7 @@ module.exports = {
 		rules: [{
 			test: /\.jsx?$/,
 			exclude: ["node_modules"],
-			use: ['react-hot-loader', 'babel-loader']
+			use: ['babel-loader']
 		}, {
 			test: /\.(less|css)$/,
 			include: [path.resolve(__dirname, 'src/components')],

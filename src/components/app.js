@@ -28,7 +28,7 @@ export default class App extends Component {
 
 	componentDidMount() {
 		setTimeout(() => {
-			loadComponent('/profile');
+			// loadComponent('/profile');
 		}, 2000);
 	}
 

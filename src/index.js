@@ -1,13 +1,10 @@
 import 'promise-polyfill';
-import 'isomorphic-fetch';
+import 'unfetch';
+
 import { h, render } from 'preact';
 import './style/index.less';
 
 let root;
-function init() {
-	let App = require('./components/app').default;
-	root = render(<App />, document.body, root);
-}
 
 // register ServiceWorker via OfflinePlugin, for prod only:
 if (process.env.NODE_ENV==='production') {
@@ -21,3 +18,8 @@ if (module.hot) {
 }
 
 init();
+
+function init() {
+	let App = require('./components/app').default;
+	root = render(<App />, document.body, root);
+}
