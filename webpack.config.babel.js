@@ -15,7 +15,7 @@ const forBuild = process.env.NODE_ENV === "production";
 
 const htmlTplPlugin = new HtmlWebpackPlugin({
 	template: './index.ejs',
-	title: 'Custom template',
+	title: 'Custom Title',
 	minify: {
 		collapseWhitespace: true,
 		minifyJS: true,

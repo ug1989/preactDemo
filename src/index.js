@@ -4,6 +4,15 @@ import 'unfetch';
 import { h, render } from 'preact';
 import './style/index.less';
 
+// hide loading animation
+const loadingDom = document.querySelector('.page_init_loading');
+loadingDom && (() => {
+	loadingDom.classList.add('fadeOut');
+	setTimeout(() => {
+		loadingDom.parentElement.removeChild(loadingDom);
+	}, 300);
+})();
+
 let root;
 
 // register ServiceWorker via OfflinePlugin, for prod only:
