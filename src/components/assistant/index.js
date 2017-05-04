@@ -12,11 +12,17 @@ export default class Home extends Component {
     return (
 			<Layout paddingApp={!true}>
 				<Header paddingApp={!true}></Header>
-				<div class={style.profile}>
-					<h1>Profile</h1>
-					<p>This is the user profile for a user named.</p>
-					<div>Profile route mounted times.</div>
-				</div>
+				<pre>
+					`
+
+
+
+					this is assistant
+
+
+
+					`
+				</pre>
 				<Footer></Footer>
 			</Layout>
       );

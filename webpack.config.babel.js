@@ -198,7 +198,7 @@ module.exports = {
       use: {
         loader: 'url-loader',
         options: {
-          limit: 5120 * 1000,
+          limit: 5120,
           name: 'static/[sha512:hash:base64:12].[ext]'
         }
       }

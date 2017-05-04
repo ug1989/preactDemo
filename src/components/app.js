@@ -1,46 +1,49 @@
 import { h, Component } from 'preact';
-import { Router } from 'preact-router';
+import { Router, route } from 'preact-router';
 import AsyncRoute from 'preact-async-route';
 
-import Home from './home';
-import Header from './header';
+import Community from './community';
 
-const loadComponent = (url, cb) => {
-  System.import('./profile').then(module => {
-    cb && cb({
-      component: module.default
+// return function that load component lazy
+const getAssistant = () => System.import('./assistant');
+const getDiscovery = () => System.import('./discovery');
+const getProfile = () => System.import('./profile');
+
+// AsyncRoute will pass (location.pathname, setComponent) to loadComponentPromise
+const loadComponent = (getComponent) => {
+  return (url, cb) => {
+    getComponent().then(module => {
+      cb && cb({
+        component: module.default
+      });
     });
-  });
+  }
 }
-
-const appContainerStyle = {
-  width: '100%',
-  height: '100%',
-  overflow: 'hidden'
-};
 
 export default class App extends Component {
 
-  handleRoute = e => {
-    this.currentUrl = e.url;
+  handleRoute (e) {
   }
 
   componentDidMount() {
     setTimeout(() => {
-      loadComponent('/profile');
-    }, 5000);
+      loadComponent(getDiscovery)('', () => {
+    		setTimeout(() => {
+					loadComponent(getProfile)()
+    		}, 2000);
+			});
+    }, 2000);
+		loadComponent(getAssistant)();
   }
 
   render() {
     return (
-      <div id="app" style={appContainerStyle}>
-				<Header/>
-				<Router hashHistory={true} onChange={false && this.handleRoute}>
-					<Home path="/"/>
-					<AsyncRoute path="/profile/" component={loadComponent} user="me"/>
-					<AsyncRoute path="/profile/:user" component={loadComponent}/>
-				</Router>
-			</div>
+			<Router hashHistory={true} onChange={this.handleRoute}>
+				<Community path="/"/>
+				<AsyncRoute path="/discovery" component={loadComponent(getDiscovery)}/>
+				<AsyncRoute path="/assistant" component={loadComponent(getAssistant)}/>
+				<AsyncRoute path="/my" component={loadComponent(getProfile)}/>
+			</Router>
       );
   }
 }

@@ -1,0 +1,19 @@
+@import '~style/helpers';
+.footer {
+    position: fixed;
+    width: 100%;
+    height: @footerHeight;
+    line-height: @footerHeight;
+    left: 0;
+    bottom: 0;
+    // border-top: 1px solid #ececec; /*no*/
+    overflow: hidden;
+	z-index: 1;
+    background: @footerBgc;
+    &>div {
+        width: 20%;
+        height: @footerHeight;
+        display: inline-block;
+        text-align: center;
+    }
+}

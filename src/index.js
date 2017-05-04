@@ -1,8 +1,12 @@
+// polyfill promise && fetch globally
 import 'promise-polyfill';
 import 'unfetch';
+import FastClick from 'fastclick';
 
 import { h, render } from 'preact';
 import './style/index.less';
+
+FastClick.attach(document.body);
 
 // hide loading animation
 const loadingDom = document.querySelector('.page_init_loading');

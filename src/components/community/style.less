@@ -1,24 +1,23 @@
 @import '~style/helpers';
-@images: '../home/images'; // 指定当前
+@images: '../community/images'; // 指定当前
 .home {
-    padding: 100px 20px 56px;
-    min-height: 100%;
+    height: 100%;
     width: 100%;
-    overflow: hidden;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-image: url('@{images}/bg.jpg');
-    background-color: rgba(0, 0, 0, .25);
+    background-color: @headerBgc;
+	.scroll;
 }
 
 .cycle {
     width: 135px;
     height: 135px;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 20px;
     text-align: center;
-    border: 0.5px solid #08f;
+    border: 1px solid #08f; /*no*/
     border-top-left-radius: 25% 75%;
     border-top-right-radius: 75% 25%;
     border-bottom-left-radius: 75% 25%;
