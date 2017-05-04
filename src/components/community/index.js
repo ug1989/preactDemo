@@ -3,7 +3,7 @@ import Layout from '../layout/index.js';
 import Header from '../layout/header.js';
 import Footer from '../layout/footer.js';
 import style from './style.less';
-import { touchScroll } from '../../utils/limitTouch.js'
+import { touchScroll } from '../../utils/touchScroll.js'
 import {get, post} from '../../utils/http.js';
 
 export default class Home extends Component {
