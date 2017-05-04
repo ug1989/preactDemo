@@ -1,46 +1,48 @@
 import { h, Component } from 'preact';
 import style from './style.less';
 
-// google-material-design-lite
-import { Button } from 'preact-mdl';
-import "material-design-lite";
-import "material-design-lite/dist/material.indigo-pink.min.css";
+// google-material-design-lite import { Button } from 'preact-mdl'; import
+// "material-design-lite"; import
+// "material-design-lite/dist/material.indigo-pink.min.css";
 
 export default class Profile extends Component {
-	state = {
-		count: 0
-	};
+  state = {
+    count: 0
+  };
 
-	// update the current time
-	updateTime = () => {
-		let time = new Date().toLocaleString();
-		this.setState({ time });
-	};
+  // update the current time
+  updateTime = () => {
+    let time = new Date().toLocaleString();
+    this.setState({
+      time
+    });
+  };
 
-	// gets called when this route is navigated to
-	componentDidMount() {
-		// start a timer for the clock:
-		this.timer = setInterval(this.updateTime, 1000);
-		this.updateTime();
+  // gets called when this route is navigated to
+  componentDidMount() {
+    // start a timer for the clock:
+    this.timer = setInterval(this.updateTime, 1000);
+    this.updateTime();
 
-		// every time we get remounted, increment a counter:
-		this.setState({ count: this.state.count+1 });
-	}
+    // every time we get remounted, increment a counter:
+    this.setState({
+      count: this.state.count + 1
+    });
+  }
 
-	// gets called just before navigating away from the route
-	componentWillUnmount() {
-		clearInterval(this.timer);
-	}
+  // gets called just before navigating away from the route
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
 
-	// Note: `user` comes from the URL, courtesy of our router
-	render({ user }, { time, count }) {
-		return (
-			<div class={style.profile}>
+  // Note: `user` comes from the URL, courtesy of our router
+  render({user}, {time, count}) {
+    return (
+      <div class={style.profile}>
 				<h1>Profile: {user}</h1>
-				<Button>{time}</Button>
 				<p>This is the user profile for a user named {user}.</p>
 				<div>Profile route mounted {count} times.</div>
 			</div>
-		);
-	}
+      );
+  }
 }

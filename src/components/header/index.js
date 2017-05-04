@@ -3,9 +3,9 @@ import { Link } from 'preact-router';
 import style from './style.less';
 
 export default class Header extends Component {
-	render() {
-		return (
-			<header class={style.header}>
+  render() {
+    return (
+      <header class={style.header}>
 				<h1>Preact {window.devicePixelRatio}</h1>
 				<nav>
 					<Link href="/">Home</Link>
@@ -13,6 +13,6 @@ export default class Header extends Component {
 					<Link href="/profile/john">John</Link>
 				</nav>
 			</header>
-		);
-	}
+      );
+  }
 }

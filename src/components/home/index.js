@@ -3,14 +3,14 @@ import style from './style.less';
 
 export default class Home extends Component {
 
-	componentDidMount() {}
+  componentDidMount() {}
 
-	render() {
-		return (
-			<div class={style.home}>
-				<input type="text" placeholder="touch me" />
+  render() {
+    return (
+      <div class={style.home}>
+				<input type="text" placeholder="touch me"/>
 				<div class={style.cycle}></div>
 			</div>
-		);
-	}
+      );
+  }
 }
