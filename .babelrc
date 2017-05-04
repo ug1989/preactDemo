@@ -1,6 +1,6 @@
 {
   "sourceMaps": true,
-  "compact": false,
+  "compact": true,
   "presets": [
     [
       "es2015",
@@ -11,7 +11,9 @@
     [
       "transform-decorators-legacy",
       "transform-async-to-generator",
-      "transform-exponentiation-operator"
+      "transform-object-rest-spread",
+      "transform-es2015-destructuring",
+      "transform-exponentiation-operator" // _esMoudle
     ],
     [
       "transform-react-jsx",

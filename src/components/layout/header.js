@@ -8,7 +8,7 @@ export default class Header extends Component {
 		const {backUrl} = this.props;
 		const backDom = this.base.querySelector(`.${style.back}`);
 		backDom.style.display = backUrl ? 'block' : 'none';
-		backDom.addEventListener('click', route.bind(null, backUrl));
+		backDom.addEventListener('click', (e) => backUrl && route(backUrl));
     this.base.addEventListener('touchmove', e => e.preventDefault());
   }
 

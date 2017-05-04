@@ -16,8 +16,6 @@ export default class Layout extends Component {
       paddingApp && (hideHeader ? style.paddingApp : style.paddingAppHeader) || ''
     ].join(' ');
 
-		console.log(layoutClass);
-
     return (
       <div class={layoutClass}>
 				{children}
