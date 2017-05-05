@@ -20,9 +20,9 @@ export default class Header extends Component {
     ].join(' ');
 
     return (
-      <div class={headerClass}>
+      <div class={headerClass} onClick={() => {location.reload()}}>
 				<div class={style.back}></div>
-				{title}
+				{title || 'click to reload'}
 			</div>
       );
   }

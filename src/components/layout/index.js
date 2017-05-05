@@ -3,10 +3,6 @@ import style from './index.less';
 
 export default class Layout extends Component {
 
-	shouldComponentUpdate() {
-		return false;
-	}
-
   render({paddingApp, hideHeader, hideFooter, children}) {
 
     const layoutClass = [
@@ -19,7 +15,6 @@ export default class Layout extends Component {
     return (
       <div class={layoutClass}>
 				{children}
-				<div class={style.hookAnchor + ' layoutHookAnchor'}></div>
 			</div>
       );
   }

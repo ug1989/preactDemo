@@ -6,11 +6,15 @@ import style from './style.less';
 
 export default class Home extends Component {
 
+  constructor() {
+    super();
+  }
+
   componentDidMount() {}
 
   render() {
     return (
-			<Layout paddingApp={!true}>
+      <Layout paddingApp={!true}>
 				<Header paddingApp={!true}></Header>
 				<div class={style.profile}>
 					<h1>Profile</h1>

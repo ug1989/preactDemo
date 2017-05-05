@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import { Router, route } from 'preact-router';
-import AsyncRoute from 'preact-async-route';
+import AsyncRoute from '../lib/asyncRoute';
 
 import Community from './community';
 
@@ -22,28 +22,30 @@ const loadComponent = (getComponent) => {
 
 export default class App extends Component {
 
-  handleRoute (e) {
-  }
+  handleRoute(e) {}
 
   componentDidMount() {
-    setTimeout(() => {
-      loadComponent(getDiscovery)('', () => {
-    		setTimeout(() => {
-					loadComponent(getProfile)()
-    		}, 2000);
-			});
-    }, 2000);
-		loadComponent(getAssistant)();
+		// preload components
+    // setTimeout(() => {
+    //   loadComponent(getDiscovery)('', () => {
+    //     setTimeout(() => {
+    //       loadComponent(getProfile)()
+    //     }, 2000);
+    //   });
+    // }, 2000);
+    // loadComponent(getAssistant)();
   }
 
   render() {
     return (
-			<Router hashHistory={true} onChange={this.handleRoute}>
+      <Router hashHistory={true} onChange={this.handleRoute}>
 				<Community path="/"/>
-				<AsyncRoute path="/discovery" component={loadComponent(getDiscovery)}/>
-				<AsyncRoute path="/assistant" component={loadComponent(getAssistant)}/>
-				<AsyncRoute path="/my" component={loadComponent(getProfile)}/>
+				<AsyncRoute path="/my" cname="profile" component={loadComponent(getProfile)}/>
+				<AsyncRoute path="/discovery" cname="discover" component={loadComponent(getDiscovery)}/>
+				<AsyncRoute path="/assistant" cname="assistant" component={loadComponent(getAssistant)}/>
+				<AsyncRoute path="/discovery/:id" cname="discover" component={loadComponent(getDiscovery)}/>
 			</Router>
       );
   }
 }
+

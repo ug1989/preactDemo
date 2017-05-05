@@ -103,6 +103,7 @@
     "preact-portal": "^1.1.2",
     "preact-render-to-string": "^3.6.0",
     "preact-router": "^2.4.1",
+    "preact-router-hash": "^0.0.1",
     "promise-polyfill": "^6.0.2",
     "proptypes": "^0.14.3",
     "px2rem-loader": "^0.1.7",

@@ -11,6 +11,8 @@ import OfflinePlugin from 'offline-plugin';
 import DashboardPlugin from 'webpack-dashboard/plugin';
 import V8LazyParseWebpackPlugin from 'v8-lazy-parse-webpack-plugin';
 
+import {reqProxy} from './proxy.js';
+
 const forBuild = process.env.NODE_ENV === "production";
 
 const htmlTplPlugin = new HtmlWebpackPlugin({
@@ -65,7 +67,10 @@ const devConfig = {
   filename: 'app.js',
   historyApiFallback: true,
   proxy: {
-    '/api': 'http://localhost:3000'
+    '/api-*': {
+			// target: 'http://127.0.0.1:3000',
+      bypass: reqProxy
+    }
   }
 };
 
@@ -215,7 +220,8 @@ module.exports = {
     ],
     alias: {
       'react': 'preact-compat',
-      'react-dom': 'preact-compat'
+      'react-dom': 'preact-compat',
+			// 'preact-router': 'preact-router-hash'
     }
   },
 
