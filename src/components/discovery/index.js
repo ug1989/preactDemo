@@ -6,15 +6,15 @@ import style from './style.less';
 
 export default class Home extends Component {
 
-	componentDidMount() { }
+  componentDidMount() { }
 
-	render() {
-		return (
-			<Layout paddingApp={!true}>
-				<Header paddingApp={!true} title="DISC" backUrl="/"></Header>
-				<div>DDSSCC</div>
-				<Footer></Footer>
-			</Layout>
-		);
-	}
+  render() {
+    return (
+      <Layout paddingApp={!true}>
+        <Header paddingApp={!true} title="DISC" backUrl="/"></Header>
+        <div>DDSSCC</div>
+        <Footer></Footer>
+      </Layout>
+    );
+  }
 }
