@@ -66,6 +66,7 @@ const devConfig = {
   contentBase: './src',
   filename: 'app.js',
   historyApiFallback: true,
+  disableHostCheck: true,
   proxy: {
     '/api-*': {
 			// target: 'http://127.0.0.1:3000',
