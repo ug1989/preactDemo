@@ -12,9 +12,7 @@ export default class Home extends Component {
 		return (
 			<Layout paddingApp={!true}>
 				<Header paddingApp={!true} title="DISC" backUrl="/"></Header>
-				<div className="discovery">
-					DDSSCC
-				</div>
+				<div>DDSSCC</div>
 				<Footer></Footer>
 			</Layout>
 		);

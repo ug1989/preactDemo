@@ -5,14 +5,14 @@ import style from './header.less';
 export default class Header extends Component {
 
   componentDidMount() {
-		const {backUrl} = this.props;
-		const backDom = this.base.querySelector(`.${style.back}`);
-		backDom.style.display = backUrl ? 'block' : 'none';
-		backDom.addEventListener('click', (e) => backUrl && route(backUrl));
+    const { backUrl } = this.props;
+    const backDom = this.base.querySelector(`.${style.back}`);
+    backDom.style.display = backUrl ? 'block' : 'none';
+    backDom.addEventListener('click', (e) => backUrl && route(backUrl));
     this.base.addEventListener('touchmove', e => e.preventDefault());
   }
 
-  render({paddingApp, title, backUrl, ref}) {
+  render({ paddingApp, title, backUrl, ref }) {
 
     const headerClass = [
       style.header,
@@ -20,10 +20,10 @@ export default class Header extends Component {
     ].join(' ');
 
     return (
-      <div class={headerClass} ref={ref} onClick={() => {location.reload()}}>
-				<div class={style.back}></div>
-				{title || 'click to reload'}
-			</div>
-      );
+      <div class={headerClass} ref={ref} onClick={() => { location.reload() }}>
+        <div class={style.back}></div>
+        {title || 'click to reload'}
+      </div>
+    );
   }
 }

@@ -20,7 +20,6 @@ const SubMenu = ({ open }) => {
   return open ? portalMenu : null;
 };
 
-
 export default class Footer extends Component {
 
   constructor() {

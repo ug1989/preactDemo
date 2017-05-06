@@ -3,7 +3,7 @@ import style from './index.less';
 
 export default class Layout extends Component {
 
-  render({paddingApp, hideHeader, hideFooter, children}) {
+  render({ paddingApp, hideHeader, hideFooter, children }) {
 
     const layoutClass = [
       style.layout,
@@ -14,8 +14,8 @@ export default class Layout extends Component {
 
     return (
       <div class={layoutClass}>
-				{children}
-			</div>
-      );
+        {children}
+      </div>
+    );
   }
 }
