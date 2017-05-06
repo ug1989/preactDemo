@@ -6,25 +6,17 @@ import style from './style.less';
 
 export default class Home extends Component {
 
-  componentDidMount() {}
+	componentDidMount() { }
 
-  render() {
-    return (
+	render() {
+		return (
 			<Layout paddingApp={!true}>
 				<Header paddingApp={!true} title="DISC" backUrl="/"></Header>
-				<pre>
-					`
-
-
-
-				this is discovery
-
-
-
-					`
-				</pre>
+				<div className="discovery">
+					DDSSCC
+				</div>
 				<Footer></Footer>
 			</Layout>
-      );
-  }
+		);
+	}
 }

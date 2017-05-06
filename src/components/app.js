@@ -22,30 +22,37 @@ const loadComponent = (getComponent) => {
 
 export default class App extends Component {
 
-  handleRoute(e) {}
+  handleRoute(e) { }
 
   componentDidMount() {
-		// preload components
-    // setTimeout(() => {
-    //   loadComponent(getDiscovery)('', () => {
-    //     setTimeout(() => {
-    //       loadComponent(getProfile)()
-    //     }, 2000);
-    //   });
-    // }, 2000);
-    // loadComponent(getAssistant)();
+    // preload components
+    setTimeout(() => {
+      loadComponent(getDiscovery)('', () => {
+        setTimeout(() => {
+          loadComponent(getProfile)()
+        }, 2000);
+      });
+    }, 2000);
+    loadComponent(getAssistant)();
   }
 
   render() {
     return (
       <Router hashHistory={true} onChange={this.handleRoute}>
-				<Community path="/"/>
-				<AsyncRoute path="/my" cname="profile" component={loadComponent(getProfile)}/>
-				<AsyncRoute path="/discovery" cname="discover" component={loadComponent(getDiscovery)}/>
-				<AsyncRoute path="/assistant" cname="assistant" component={loadComponent(getAssistant)}/>
-				<AsyncRoute path="/discovery/:id" cname="discover" component={loadComponent(getDiscovery)}/>
-			</Router>
-      );
+        <Community default />
+        <AsyncRoute path="/my" cname="profile" component={loadComponent(getProfile)} />
+        <AsyncRoute path="/assistant" cname="assistant" component={loadComponent(getAssistant)} />
+        <AsyncRoute path="/discovery" cname="discover" component={loadComponent(getDiscovery)} />
+        <AsyncRoute path="/discovery/:id" cname="discover" component={loadComponent(getDiscovery)} />
+      </Router>
+    );
   }
 }
 
+// 打包至同一文件
+// import Assistant from './assistant';
+// import Discovery from './discovery';
+// import Profile from './profile';
+// <Discovery path="/discovery" />
+// <Assistant path="/assistant" />
+// <Profile path="/my" />

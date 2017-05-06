@@ -77,7 +77,7 @@ export default class Home extends Component {
       ((_index) => {
         res.push(<div class={style.cycle} ref={(_this) => {
           this.refs[_index + ''] = _this;
-        }}>{index}</div>);
+        }}></div>);
       })(index)
     }
 

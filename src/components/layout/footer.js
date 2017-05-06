@@ -6,16 +6,18 @@ import style from './footer.less';
 const hookSelector = '.bodyHookAnchor';
 const hookDom = document.querySelector(hookSelector);
 
-const SubMenu = ({open}) => {
+const SubMenu = ({ open }) => {
   hookDom.style.zIndex = (open ? 1 : -1);
-  return open && <Portal into={hookSelector}>
-		<div class={style.innerMenu} onClick={(e) => {e.stopPropagation()}}>
-			<div>1</div>
-			<div>2</div>
-			<div>3</div>
-			<div>4</div>
-		</div>
-	</Portal> || null;
+  const haddleClick = url => () => route(url);
+  const portalMenu = <Portal into={hookSelector}>
+    <div class={style.innerMenu} onClick={(e) => { e.stopPropagation() }}>
+      <div onClick={haddleClick('new/abc')}>1</div>
+      <div onClick={haddleClick('new/bca')}>2</div>
+      <div onClick={haddleClick('new/cab')}>3</div>
+      <div onClick={haddleClick('new/cba')}>4</div>
+    </div>
+  </Portal>
+  return open ? portalMenu : null;
 };
 
 
@@ -30,9 +32,9 @@ export default class Footer extends Component {
 
   routePath(path) {
     path && route(path);
-		this.setState({
-			showInnerMenu: false
-		});
+    this.setState({
+      showInnerMenu: false
+    });
   }
 
   toggleInnerMenu() {
@@ -42,24 +44,24 @@ export default class Footer extends Component {
   }
 
   componentDidMount() {
-		hookDom.addEventListener('click', () => {
-			this.setState({
-				showInnerMenu: false
-			});
-		});
+    hookDom.addEventListener('click', () => {
+      this.setState({
+        showInnerMenu: false
+      });
+    });
     this.base.addEventListener('touchmove', e => e.preventDefault());
   }
 
-  render({}, {showInnerMenu}) {
+  render({ }, { showInnerMenu }) {
     return (
       <div class={style.footer}>
-				<div onClick={this.routePath.bind(this, '/')}>Ho</div>
-				<div onClick={this.routePath.bind(this, '/discovery')}>Dis</div>
-				<div onClick={this.toggleInnerMenu.bind(this)}>+</div>
-				<div onClick={this.routePath.bind(this, '/assistant')}>Ass</div>
-				<div onClick={this.routePath.bind(this, '/my')}>My</div>
-				<SubMenu open={showInnerMenu}/>
-			</div>
-      );
+        <div onClick={this.routePath.bind(this, '/')}>Ho</div>
+        <div onClick={this.routePath.bind(this, '/discovery')}>Dis</div>
+        <div onClick={this.toggleInnerMenu.bind(this)}>+</div>
+        <div onClick={this.routePath.bind(this, '/assistant')}>Ass</div>
+        <div onClick={this.routePath.bind(this, '/my')}>My</div>
+        <SubMenu open={showInnerMenu} />
+      </div>
+    );
   }
 }
