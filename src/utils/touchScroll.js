@@ -2,6 +2,7 @@ let domElement;
 let dynamicDom;
 let freeTop;
 let freeBottom;
+let trackPosition;
 let startPointY = 0;
 let lastTransformY = 0;
 let lastTouchmoveTime = 0;
@@ -66,9 +67,16 @@ document.addEventListener('touchmove', (event) => {
       }
     }
   }
+	// pass position to listener
+	if (trackPosition) {
+		trackPosition(touchY - startPointY);
+	}
 });
 
-document.addEventListener('touchend', endTouch);
+document.addEventListener('touchend', (event) => {
+	trackPosition && trackPosition(null);
+	endTouch();
+});
 
 // 更换 touchScrollDom, 重置参数
 export function touchScroll(dynamic, option) {
@@ -76,5 +84,6 @@ export function touchScroll(dynamic, option) {
   domElement = null;
   freeTop = option && option.freeTop;
   freeBottom = option && option.freeBottom;
+	trackPosition = option && option.trackPosition;
   startPointY = lastTransformY = lastTouchmoveTime = touchMoveSpeed = 0;
 }

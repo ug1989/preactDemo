@@ -1,35 +1,61 @@
 @import '~style/helpers';
 @images: '../community/images'; // 指定当前
 .home {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('@{images}/bg.jpg');
+  background-color: @headerBgc;
+  .scroll;
+  .container {
     height: 100%;
     width: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url('@{images}/bg.jpg');
-    background-color: @headerBgc;
-    .scroll;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+.refresh {
+  width: 100%;
+  height: 2rem;
+  position: absolute;
+  text-align: center;
+	color: #fff;
+	.inner {
+		margin: auto;
+		width: 2rem;
+		height: 2rem;
+		font-size: 1.45rem;
+		line-height: 2rem;
+		transition-timing-function: linear;
+		border-radius: 50%;
+	}
 }
 
 .cycle {
-    width: 135px;
-    height: 135px;
-    margin: auto;
-    margin-top: 20px;
-    text-align: center;
-    border: 1px solid #08f;
-    /*no*/
-    border-top-left-radius: 25% 75%;
-    border-top-right-radius: 75% 25%;
-    border-bottom-left-radius: 75% 25%;
-    border-bottom-right-radius: 25% 75%;
-    background-image: url('@{images}/bg.png');
-    background-size: cover;
+  width: 135px;
+  height: 135px;
+  margin: auto;
+  margin-top: 20px;
+  text-align: center;
+  border: 1px solid #08f;
+  /*no*/
+  border-top-left-radius: 25% 75%;
+  border-top-right-radius: 75% 25%;
+  border-bottom-left-radius: 75% 25%;
+  border-bottom-right-radius: 25% 75%;
+  background-image: url('@{images}/bg.png');
+  background-size: cover;
 }
 
 input {
-    width: 100%;
-    height: 2.2rem;
-    line-height: 2.2rem;
-    font-size: 1.6rem;
+  width: 100%;
+  height: 2.2rem;
+  line-height: 2.2rem;
+  font-size: 1.6rem;
 }

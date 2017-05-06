@@ -1,6 +1,6 @@
 export function reqProxy(req, res, option) {
 
-  const delay = Math.random * 1000;
+  const delay = (1 + Math.random) * 5000;
   const matchReq = req.url.split('?')[0];
 
   const resObjs = {

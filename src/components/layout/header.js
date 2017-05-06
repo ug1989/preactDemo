@@ -12,7 +12,7 @@ export default class Header extends Component {
     this.base.addEventListener('touchmove', e => e.preventDefault());
   }
 
-  render({paddingApp, title, backUrl}) {
+  render({paddingApp, title, backUrl, ref}) {
 
     const headerClass = [
       style.header,
@@ -20,7 +20,7 @@ export default class Header extends Component {
     ].join(' ');
 
     return (
-      <div class={headerClass} onClick={() => {location.reload()}}>
+      <div class={headerClass} ref={ref} onClick={() => {location.reload()}}>
 				<div class={style.back}></div>
 				{title || 'click to reload'}
 			</div>
