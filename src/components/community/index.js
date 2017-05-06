@@ -70,7 +70,7 @@ export default class Home extends Component {
     });
   }
 
-  render({}, {showLoading, onLoading, loadingTop}) {
+  render({ }, { showLoading, onLoading, loadingTop }) {
     const res = [];
     let index = this.state.count || 12;
     while (--index) {
@@ -88,24 +88,23 @@ export default class Home extends Component {
 
     const loadingStyleInner = {
       transform: `rotate(${onLoading ? 10000 : (loadingTop / pullLimitH * 360 * 3)}deg)`,
-      'transition-duration': onLoading ? '10s' : '0s'
+      'transition-duration': onLoading ? '10s' : '0s',
+      opacity: loadingTop / pullLimitH - 0.2
     };
 
     return (
       <Layout paddingApp={true}>
-				<Header paddingApp={true} title="COMM" ref={_dom => {
-        this.refs.header = _dom
-      }}></Header>
-				<div style={loadingStyleContainer} class={style.refresh} ref={_dom => this.refs.refreshDom = _dom}>
-					<div class={style.inner} style={loadingStyleInner}>☀</div>
-				</div>
-				<div class={style.home} ref={_dom => this.refs.home = _dom}>
-					<div class={style.container}>
-						{res.reverse().map((item) => item)}
-					</div>
-				</div>
-				<Footer></Footer>
-			</Layout>
-      );
+        <Header paddingApp={true} title="COMM" ref={_dom => this.refs.header = _dom}></Header>
+        <div style={loadingStyleContainer} class={style.refresh} ref={_dom => this.refs.refreshDom = _dom}>
+          <div class={style.inner} style={loadingStyleInner}>❅</div>
+        </div>
+        <div class={style.home} ref={_dom => this.refs.home = _dom}>
+          <div class={style.container}>
+            {res.reverse().map((item) => item)}
+          </div>
+        </div>
+        <Footer></Footer>
+      </Layout>
+    );
   }
 }
