@@ -24,6 +24,7 @@ class AsyncRoute extends Component {
   render() {
     const localComponent = cacheCompontents[this.props.cname];
     if (localComponent) {
+      this.props.loading && this.props.loading(true); // hide loading 
       return h(localComponent, this.props);
     } else if (this.props.loading) {
       return this.props.loading();

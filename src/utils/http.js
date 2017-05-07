@@ -16,7 +16,7 @@ const _fetch = (url, options) => {
     _tipTime = nowTime - _tipTime > netWeakWait ? nowTime : _tipTime;
   }, netWeakWait * (options.method == 'POST' ? 2 : 1));
 
-  options.mode = 'no-cors';
+  // options.mode = 'no-cors';
 
   return fetch(url, options).then(function (res) {
     delete _fetch[reqTimeoutHash];
@@ -34,12 +34,10 @@ const jsonParse = (res) => {
     };
     try {
       jsonRes = JSON.parse(resText);
-      // 设定后台返回 status 只会是 'OK' or 'ERROR'
-      resError = typeof jsonRes.status == 'number';
-      failRes.message += resError && ': http status code ' || '';
     } catch (e) {
       resError = true;
-      failRes.message += ': not json type';
+      // 请求失败 || 无法解析
+      failRes.errorType = typeof res.status == 'number' ? 'httpError' : 'typeError';
     }
     return resError ? failRes : jsonRes;
   });

@@ -18,32 +18,35 @@ const loadComponent = (getComponent) => {
       });
     });
   }
-}
+};
+
+const _loading = (hideLoading) => {
+  const loadingDom = document.querySelector('.page_init_loading');
+  if (!loadingDom) return;
+  if (hideLoading) {
+    loadingDom.classList.add('fadeOut');
+    setTimeout(_ => loadingDom.style.zIndex = -1, 360);
+  } else {
+    loadingDom.classList.remove('fadeOut');
+    loadingDom.style.zIndex = 1;
+  }
+};
 
 export default class App extends Component {
 
   handleRoute(e) { }
 
   componentDidMount() {
-    // preload components
-    // setTimeout(() => {
-    //   loadComponent(getDiscovery)('', () => {
-    //     setTimeout(() => {
-    //       loadComponent(getProfile)()
-    //     }, 2000);
-    //   });
-    // }, 2000);
-    loadComponent(getAssistant)();
   }
 
   render() {
     return (
       <Router hashHistory={true} onChange={this.handleRoute}>
         <Community default />
-        <AsyncRoute path="/my" cname="profile" component={loadComponent(getProfile)} />
-        <AsyncRoute path="/assistant" cname="assistant" component={loadComponent(getAssistant)} />
-        <AsyncRoute path="/discovery" cname="discover" component={loadComponent(getDiscovery)} />
-        <AsyncRoute path="/discovery/:id" cname="discover" component={loadComponent(getDiscovery)} />
+        <AsyncRoute path="/my" cname="profile" component={loadComponent(getProfile)} loading={_loading} />
+        <AsyncRoute path="/assistant" cname="assistant" component={loadComponent(getAssistant)} loading={_loading} />
+        <AsyncRoute path="/discovery" cname="discover" component={loadComponent(getDiscovery)} loading={_loading} />
+        <AsyncRoute path="/discovery/:id" cname="discover" component={loadComponent(getDiscovery)} loading={_loading} />
       </Router>
     );
   }
@@ -56,3 +59,13 @@ export default class App extends Component {
 // <Discovery path="/discovery" />
 // <Assistant path="/assistant" />
 // <Profile path="/my" />
+
+// preload components
+// setTimeout(() => {
+//   loadComponent(getDiscovery)('', () => {
+//     setTimeout(() => {
+//       loadComponent(getProfile)()
+//     }, 2000);
+//   });
+// }, 2000);
+// loadComponent(getAssistant)();

@@ -12,9 +12,7 @@ FastClick.attach(document.body);
 const loadingDom = document.querySelector('.page_init_loading');
 loadingDom && (() => {
   loadingDom.classList.add('fadeOut');
-  setTimeout(() => {
-    loadingDom.parentElement.removeChild(loadingDom);
-  }, 300);
+  setTimeout(_ => loadingDom.style.zIndex = -1, 350);
 })();
 
 let root;
