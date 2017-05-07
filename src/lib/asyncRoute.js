@@ -9,12 +9,6 @@ class AsyncRoute extends Component {
       cacheCompontents[this.props.cname] = component;
       this.setState({});
     });
-
-  // componentData && componentData.then && componentData.then(component => {
-  //   cacheCompontents[this.props.cname] = component;
-  //   this.setState({});
-  // 	console.log('preload load', this.props.cname);
-  // });
   }
 
   componentDidMount() {
@@ -32,8 +26,7 @@ class AsyncRoute extends Component {
     if (localComponent) {
       return h(localComponent, this.props);
     } else if (this.props.loading) {
-      const loadingComponent = this.props.loading();
-      return loadingComponent;
+      return this.props.loading();
     }
     return null;
   }

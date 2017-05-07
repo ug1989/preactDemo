@@ -26,13 +26,13 @@ export default class App extends Component {
 
   componentDidMount() {
     // preload components
-    setTimeout(() => {
-      loadComponent(getDiscovery)('', () => {
-        setTimeout(() => {
-          loadComponent(getProfile)()
-        }, 2000);
-      });
-    }, 2000);
+    // setTimeout(() => {
+    //   loadComponent(getDiscovery)('', () => {
+    //     setTimeout(() => {
+    //       loadComponent(getProfile)()
+    //     }, 2000);
+    //   });
+    // }, 2000);
     loadComponent(getAssistant)();
   }
 

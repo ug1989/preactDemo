@@ -4,6 +4,8 @@ import Header from '../layout/header.js';
 import Footer from '../layout/footer.js';
 import style from './style.less';
 
+import G from '!url-loader!../community/images/bg.jpg'
+
 export default class Home extends Component {
 
   componentDidMount() { }
@@ -12,7 +14,9 @@ export default class Home extends Component {
     return (
       <Layout paddingApp={!true}>
         <Header paddingApp={!true} title="DISC" backUrl="/"></Header>
-        <div>DDSSCC</div>
+        <div>
+          <img src={G} alt=""/>
+        </div>
         <Footer></Footer>
       </Layout>
     );
