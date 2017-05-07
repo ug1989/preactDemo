@@ -1,4 +1,4 @@
-let _tipTime = 0;
+let _tipTime = 0; // last network timeout tip time
 
 const _fetch = (url, options) => {
 
@@ -16,38 +16,47 @@ const _fetch = (url, options) => {
     _tipTime = nowTime - _tipTime > netWeakWait ? nowTime : _tipTime;
   }, netWeakWait * (options.method == 'POST' ? 2 : 1));
 
-  return fetch(url, options).then(function(res) {
+  options.mode = 'no-cors';
+
+  return fetch(url, options).then(function (res) {
     delete _fetch[reqTimeoutHash];
     return res;
-  }).then((res) => {
-		return res.text().then((resText) => {
-			let jsonRes;
-			let resError = false;
-			const failRes = {
-				status: 'ERROR',
-				message: 'Response Error'
-			};
-			try {
-				jsonRes = JSON.parse(resText);
-				// 设定后台返回 status 只会是 'OK' or 'ERROR'
-				resError = typeof jsonRes.status == 'number';
-				failRes.message += resError && ': http status code ' || '';
-			} catch(e) {
-				resError = true;
-				failRes.message += ': not json type';
-			}
-			return resError ? failRes : jsonRes;
-		});
-	})
+  })
 }
 
-export function get(url) {
-  return _fetch(url, {
+const jsonParse = (res) => {
+  return res.text().then((resText) => {
+    let jsonRes;
+    let resError = false;
+    const failRes = {
+      status: 'ERROR',
+      message: 'Response Error'
+    };
+    try {
+      jsonRes = JSON.parse(resText);
+      // 设定后台返回 status 只会是 'OK' or 'ERROR'
+      resError = typeof jsonRes.status == 'number';
+      failRes.message += resError && ': http status code ' || '';
+    } catch (e) {
+      resError = true;
+      failRes.message += ': not json type';
+    }
+    return resError ? failRes : jsonRes;
+  });
+};
+
+export function get(url, type = 'json') {
+  const _res = _fetch(url, {
     method: 'GET'
   });
+  if (type == 'json')
+    return _res.then(jsonParse);
+  if (type == 'text')
+    return _res.then(res => res.text());
+  return _res;
 }
 
-export function post(url, data, noForm) {
+export function post(url, data, type = 'json', noForm) {
   data = data || {};
   const formData = new FormData();
   if (!noForm) {
@@ -55,8 +64,13 @@ export function post(url, data, noForm) {
       formData.append(key, data[key]);
     }
   }
-  return _fetch(url, {
+  const _res = _fetch(url, {
     method: 'POST',
     body: noForm && JSON.stringify(data) || formData
   });
+  if (type == 'json')
+    return _res.then(jsonParse);
+  if (type == 'text')
+    return _res.then(res => res.text());
+  return _res;
 }

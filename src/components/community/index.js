@@ -63,8 +63,10 @@ export default class Home extends Component {
   }
 
   initData(callback) {
-    get(0 ? 'http://127.0.0.1:8080/api-front/session/create?device=web&version=1.0.0&sessionId=' : '/api-502').then((json) => {
-      post('/api-front/session/create?device=web&version=1.0.0&sessionId=', {}).then((json) => {
+    get(0 ? 'http://127.0.0.1:8080/api-front/session/create?device=web&version=1.0.0&sessionId=' : '/api-502', 'json').then((res) => {
+      console.log(res);
+      post('/api-front/session/create?device=web&version=1.0.0&sessionId=', {}, 'text').then((res) => {
+        console.log(res);
         callback && callback();
       });
     });
