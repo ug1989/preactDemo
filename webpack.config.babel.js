@@ -126,7 +126,8 @@ const inlineCssloader = [{
 }, {
   loader: "css-loader",
   options: {
-    module: true
+    module: true,
+    localIdentName: '[local]-[hash:base64:6]'
   }
 }, {
   loader: "postcss-loader",
