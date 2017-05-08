@@ -6,9 +6,13 @@ import style from './style.less';
 
 import G from '!url-loader!../community/images/bg.jpg'
 
+import { touchScroll } from '../../utils/touchScroll.js'
+import { get, post } from '../../utils/http.js';
+import appInfo from '../../utils/app.js';
+
 export default class Home extends Component {
 
-  componentDidMount() { }
+  componentDidMount() {}
 
   render() {
     return (
@@ -19,6 +23,6 @@ export default class Home extends Component {
         </div>
         <Footer></Footer>
       </Layout>
-    );
+      );
   }
 }
