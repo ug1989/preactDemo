@@ -7,14 +7,15 @@ const hookSelector = '.bodyHookAnchor';
 const hookDom = document.querySelector(hookSelector);
 
 const SubMenu = ({ open }) => {
-  hookDom.style.zIndex = (open ? 1 : -1);
   const haddleClick = url => () => route(url);
   const portalMenu = <Portal into={hookSelector}>
-    <div class={style.innerMenu} onClick={(e) => { e.stopPropagation() }}>
-      <div onClick={haddleClick('new/abc')}>1</div>
-      <div onClick={haddleClick('new/bca')}>2</div>
-      <div onClick={haddleClick('new/cab')}>3</div>
-      <div onClick={haddleClick('new/cba')}>4</div>
+    <div class={style.subMenuLayer}>
+      <div class={style.innerMenu} onClick={(e) => { e.stopPropagation() }}>
+        <div onClick={haddleClick('new/abc')}>1</div>
+        <div onClick={haddleClick('new/bca')}>2</div>
+        <div onClick={haddleClick('new/cab')}>3</div>
+        <div onClick={haddleClick('new/cba')}>4</div>
+      </div>
     </div>
   </Portal>
   return open ? portalMenu : null;
