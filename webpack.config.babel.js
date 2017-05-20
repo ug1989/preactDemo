@@ -11,7 +11,7 @@ import OfflinePlugin from 'offline-plugin';
 import DashboardPlugin from 'webpack-dashboard/plugin';
 import V8LazyParseWebpackPlugin from 'v8-lazy-parse-webpack-plugin';
 
-import {reqProxy} from './proxy.js';
+import { reqProxy } from './proxy.js';
 
 const forBuild = process.env.NODE_ENV === "production";
 
@@ -69,7 +69,7 @@ const devConfig = {
   disableHostCheck: true,
   proxy: {
     '/api-*': {
-			// target: 'http://127.0.0.1:3000',
+      // target: 'http://127.0.0.1:3000',
       bypass: reqProxy
     }
   }
@@ -126,7 +126,8 @@ const inlineCssloader = [{
 }, {
   loader: "css-loader",
   options: {
-    module: true
+    module: true,
+    localIdentName: '[local]-[hash:base64:6]'
   }
 }, {
   loader: "postcss-loader",
@@ -222,7 +223,7 @@ module.exports = {
     alias: {
       'react': 'preact-compat',
       'react-dom': 'preact-compat',
-			'preact-router': 'preact-router-hash'
+      'preact-router': 'preact-router-hash'
     }
   },
 

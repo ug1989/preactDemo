@@ -6,6 +6,7 @@ import style from './style.less';
 
 import { touchScroll } from '../../utils/touchScroll.js'
 import { get, post } from '../../utils/http.js';
+import appInfo from '../../utils/app.js';
 
 let pullLimitH = -10000;
 
