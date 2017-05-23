@@ -27,8 +27,9 @@
   <link rel="icon" type="image/png" href="/assets/icons/favicon-16x16.png" sizes="16x16">
   <link rel="manifest" href="./manifest.json">
   <script>
-    (function () {
-      var scale = 1 / (window.devicePixelRatio || 1);
+    (function setViewPortScale(_scale) {
+      window._setViewPortScale = setViewPortScale;
+      var scale = _scale || (1 / (window.devicePixelRatio || 1));
       var metaEl = document.querySelector('meta[name="viewport"]');
       metaEl.setAttribute('content', 'width=device-width, initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
       setBaseFont();

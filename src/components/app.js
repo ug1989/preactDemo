@@ -3,6 +3,7 @@ import { Router, route } from 'preact-router';
 import AsyncRoute from '../lib/asyncRoute';
 
 import Community from './community';
+import './public/toast.js';
 
 // return function that load component lazy
 const getAssistant = () => System.import('./assistant');

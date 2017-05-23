@@ -223,7 +223,7 @@ module.exports = {
     alias: {
       'react': 'preact-compat',
       'react-dom': 'preact-compat',
-      'preact-router': 'preact-router-hash'
+			// 'preact-router': 'preact-router-hash'
     }
   },
 

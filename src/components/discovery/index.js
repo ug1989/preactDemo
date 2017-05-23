@@ -6,7 +6,13 @@ import style from './style.less';
 
 export default class Home extends Component {
 
-  componentDidMount() { }
+  componentDidMount() {
+    _setViewPortScale(1);
+  }
+
+  componentWillUnmount() {
+    _setViewPortScale();
+  }
 
   render() {
     return (
