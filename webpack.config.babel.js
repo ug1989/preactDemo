@@ -178,7 +178,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "build"),
     publicPath: "/",
-    filename: "static/[name].[chunkhash:6].js"
+    filename: "static/[name].[hash:6].js"
   },
 
   module: {
@@ -223,7 +223,7 @@ module.exports = {
     alias: {
       'react': 'preact-compat',
       'react-dom': 'preact-compat',
-			// 'preact-router': 'preact-router-hash'
+      'babel': 'babel-cli',
     }
   },
 

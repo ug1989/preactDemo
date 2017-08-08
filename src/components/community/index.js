@@ -102,9 +102,7 @@ export default class Home extends Component {
           <div class={style.inner} style={loadingStyleInner}>❅</div>
         </div>
         <div class={style.home} ref={_dom => this.refs.home = _dom}>
-          <div class={style.container}>
             {res.reverse().map((item) => item)}
-          </div>
         </div>
         <Footer></Footer>
       </Layout>

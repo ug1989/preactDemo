@@ -1,5 +1,8 @@
+// 整体应用入口
+
 import { h, Component } from 'preact';
 import { Router, route } from 'preact-router';
+import { createHashHistory } from 'history';
 import AsyncRoute from '../lib/asyncRoute';
 
 import Community from './community';
@@ -42,7 +45,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <Router hashHistory={true} onChange={this.handleRoute}>
+      <Router history={createHashHistory()} onChange={this.handleRoute}>
         <Community default />
         <AsyncRoute path="/my" cname="profile" component={loadComponent(getProfile)} loading={_loading} />
         <AsyncRoute path="/assistant" cname="assistant" component={loadComponent(getAssistant)} loading={_loading} />
