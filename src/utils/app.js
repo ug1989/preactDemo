@@ -13,13 +13,13 @@ const _extendPath = () => {
   for (let key in obj) {
     _extro.push(key + '=' + obj[key]);
   }
-  const extorStr = _extro.join('&');
+  const extroStr = _extro.join('&');
   for (let key in paths) {
-    let _path = paths[key].replace(_extendPath.extorStr, '');
+    let _path = paths[key].replace(_extendPath.extroStr, '');
     let _query = _path.indexOf('?') != -1;
-    paths[key] = _path + (_query ? '&' : '?') + extorStr;
+    paths[key] = _path + (_query ? '&' : '?') + extroStr;
   }
-  _extendPath.extorStr = extorStr;
+  _extendPath.extroStr = extroStr;
 };
 
 const injectSet = (key, value) => {

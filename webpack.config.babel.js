@@ -50,7 +50,7 @@ const cleanPlugin = new CleanWebpackPlugin(['build'], {
 
 const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
   output: {
-    comments: false
+    comments: !false
   },
   compress: {
     warnings: false
@@ -93,6 +93,11 @@ const offlinePlugin = new OfflinePlugin({
 const hiddenErrorPlugin = new ReplacePlugin([{
   partten: /throw\s+(new\s+)?([a-zA-Z]+)?Error\s*\(/g, // partten: /throw\s+(new\s+)?[a-zA-Z]+Error\s*\(/g,
   replacement: () => 'return;('
+}]);
+
+const matchRpx = new ReplacePlugin([{
+  partten: /(\d)rpx/g, // replace rpx => px
+  replacement: (a, b) => b + 'px'
 }]);
 
 const extractCssLoader = ExtractTextPlugin.extract({
@@ -158,6 +163,7 @@ const webpackPlugins = forBuild ?
     copyFilePlugin,
     uglifyPlugin,
     hiddenErrorPlugin,
+    matchRpx,
     offlinePlugin,
     extractCssPlugin,
     htmlTplPlugin
@@ -165,6 +171,7 @@ const webpackPlugins = forBuild ?
   [
     new DashboardPlugin(),
     new V8LazyParseWebpackPlugin(),
+    matchRpx,
     htmlTplPlugin
   ];
 
@@ -229,7 +236,7 @@ module.exports = {
 
   plugins: webpackPlugins,
 
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
 
   target: "web",
 

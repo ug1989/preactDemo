@@ -4,7 +4,7 @@ import Header from '../layout/header.js';
 import Footer from '../layout/footer.js';
 import style from './style.less';
 
-import G from '!url-loader!../community/images/bg.jpg'
+import G from '!url-loader!../index/images/bg.jpg'
 
 import { touchScroll } from '../../utils/touchScroll.js'
 import { get, post } from '../../utils/http.js';

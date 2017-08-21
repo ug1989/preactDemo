@@ -1,11 +1,10 @@
 // 整体应用入口
-
 import { h, Component } from 'preact';
 import { Router, route } from 'preact-router';
 import { createHashHistory } from 'history';
 import AsyncRoute from '../lib/asyncRoute';
 
-import Community from './community';
+import Index from './index';
 import './public/toast.js';
 
 // return function that load component lazy
@@ -36,17 +35,23 @@ const _loading = (hideLoading) => {
   }
 };
 
+const hashHistory = createHashHistory();
+
 export default class App extends Component {
 
-  handleRoute(e) { }
+  handleRoute(e) {}
 
   componentDidMount() {
+    let _push = hashHistory.push;
+    hashHistory.push = (path, state) => {
+      path != hashHistory.location.pathname && _push(path, state);
+    }
   }
 
   render() {
     return (
-      <Router history={createHashHistory()} onChange={this.handleRoute}>
-        <Community default />
+      <Router history={hashHistory} onChange={this.handleRoute}>
+        <Index default />
         <AsyncRoute path="/my" cname="profile" component={loadComponent(getProfile)} loading={_loading} />
         <AsyncRoute path="/assistant" cname="assistant" component={loadComponent(getAssistant)} loading={_loading} />
         <AsyncRoute path="/discovery" cname="discover" component={loadComponent(getDiscovery)} loading={_loading} />
