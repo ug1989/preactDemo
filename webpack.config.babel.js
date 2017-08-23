@@ -9,7 +9,7 @@ import ReplacePlugin from 'replace-bundle-webpack-plugin';
 import DashboardPlugin from 'webpack-dashboard/plugin';
 import V8LazyParseWebpackPlugin from 'v8-lazy-parse-webpack-plugin';
 
-const forBuild = 1 || process.env.NODE_ENV === "production";
+const forBuild = process.env.NODE_ENV === "production";
 
 const htmlTplPlugin = new HtmlWebpackPlugin({
   template: './index.ejs',
@@ -49,6 +49,8 @@ const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
 const devConfig = {
   port: process.env.PORT || 8080,
   host: '0.0.0.0',
+  hot: true,
+  quiet: true,
   colors: true,
   compress: true,
   publicPath: '/',
