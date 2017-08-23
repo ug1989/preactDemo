@@ -7,7 +7,7 @@ const cacheCompontents = {};
 class AsyncRoute extends Component {
 
   loadComponent() {
-    const componentData = this.props.component(this.props.url, ({component}) => {
+    this.props.component(this.props.url, ({component}) => {
       cacheCompontents[this.props.cname] = component;
       this.setState({});
     });
@@ -36,3 +36,12 @@ class AsyncRoute extends Component {
 }
 
 export default AsyncRoute;
+
+export function loadComponent (getComponent) {
+  return (url, cb) => {
+    getComponent().then(module => {
+      let loadModule = {component: module.default};
+      cb ? cb(loadModule) : cacheCompontents[getComponent.cname] = module.default;
+    });
+  }
+};

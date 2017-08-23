@@ -1,3 +1,8 @@
+/* * *
+ * 全局共享变量: appData
+ * setInfo: 默认记录在内存中，第三个参数为真时存储到 localStorage
+* * */
+
 const appData = {};
 const _lsEnable = localStorage && localStorage.getItem;
 
@@ -8,9 +13,9 @@ if (_lsEnable) {
   }
 }
 
-export function setInfo(key, value, keep = true) {
+export function setInfo(key, value) {
   let strValue;
-  if (keep && _lsEnable) {
+  if (_lsEnable) {
     strValue = JSON.stringify(value);
     localStorage.setItem(key, strValue);
   }

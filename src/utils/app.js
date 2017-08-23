@@ -1,39 +1,27 @@
 import { getInfo, setInfo, clearInfo } from './base.js';
-import paths from './path.js';
+import paths from './apiPath.js';
 
-const getPathExtro = () => {
-  return {
-    sessionId: getInfo('sessionId') || ''
-  }
-};
-
-const _extendPath = () => {
-  const _extro = [];
-  const obj = getPathExtro();
-  for (let key in obj) {
-    _extro.push(key + '=' + obj[key]);
-  }
-  const extroStr = _extro.join('&');
+const extendPath = () => {
+  const sessionId = getInfo('session') && getInfo('session').result || '';
+  const extroStr = [`sessionId=${sessionId}`, 'device=web', 'version=1.0.0'].join('&');
   for (let key in paths) {
-    let _path = paths[key].replace(_extendPath.extroStr, '');
-    let _query = _path.indexOf('?') != -1;
-    paths[key] = _path + (_query ? '&' : '?') + extroStr;
+    paths[key] = extendPath.extroStr ? paths[key].replace(extendPath.extroStr, extroStr) : paths[key] + '?' + extroStr
   }
-  _extendPath.extroStr = extroStr;
+  extendPath.extroStr = extroStr;
 };
 
-const injectSet = (key, value) => {
+const _setInfo = (key, value) => {
   setInfo(key, value);
-  key == 'sessionId' && _extendPath();
+  key == 'session' && extendPath();
 };
-
-_extendPath(); //  根据 localStorage 初始化 apiPath 参数
 
 const appInfo = {
   apiPath: paths,
   getInfo: getInfo,
-  setInfo: injectSet,
+  setInfo: _setInfo,
   clearInfo: clearInfo
 };
+
+extendPath(); // 根据本地 session 初始化 apiPath 参数
 
 export default appInfo

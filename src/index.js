@@ -1,11 +1,11 @@
 // polyfill promise && fetch globally
 import 'promise-polyfill';
 import 'unfetch';
-import FastClick from 'fastclick';
 
 import { h, render } from 'preact';
 import './style/index.less';
 
+import FastClick from 'fastclick';
 FastClick.attach(document.body);
 
 // hide loading animation
@@ -16,11 +16,6 @@ loadingDom && (() => {
 })();
 
 let root;
-
-// register ServiceWorker via OfflinePlugin, for prod only:
-if (process.env.NODE_ENV === 'production') {
-  require('./pwa');
-}
 
 // in development, set up HMR:
 if (module.hot) {

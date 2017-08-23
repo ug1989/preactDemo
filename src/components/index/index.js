@@ -4,7 +4,6 @@ import Header from '../layout/header.js';
 import Footer from '../layout/footer.js';
 import style from './style.less';
 
-import { touchScroll } from '../../utils/touchScroll.js'
 import { get, post } from '../../utils/http.js';
 import appInfo from '../../utils/app.js';
 
@@ -21,10 +20,6 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    this.refs.home.classList.add('limitTouchScroll');
-    touchScroll(this.refs.home, {
-      trackPosition: this.pullLoading.bind(this)
-    });
     pullLimitH = parseInt(getComputedStyle(this.refs.header.base).height);
     this.initData();
   }
@@ -64,7 +59,7 @@ export default class Home extends Component {
   }
 
   initData(callback) {
-    get(0 ? 'http://127.0.0.1:8080/api-front/session/create?device=web&version=1.0.0&sessionId=' : '/api-502', 'json').then((res) => {
+    get('http://bala.so/wxapp/freeGame').then((res) => {
       console.log(res);
       post('/api-front/session/create?device=web&version=1.0.0&sessionId=', {}, 'text').then((res) => {
         console.log(res);
@@ -101,7 +96,7 @@ export default class Home extends Component {
         <div style={loadingStyleContainer} class={style.refresh} ref={_dom => this.refs.refreshDom = _dom}>
           <div class={style.inner} style={loadingStyleInner}>❅</div>
         </div>
-        <div class={style.home} ref={_dom => this.refs.home = _dom}>
+        <div class={style.home + ' touch_scroll'} ref={_dom => this.refs.home = _dom}>
             {res.reverse().map((item) => item)}
         </div>
         <Footer></Footer>

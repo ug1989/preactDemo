@@ -3,6 +3,7 @@ import Layout from '../layout/index.js';
 import Header from '../layout/header.js';
 import Footer from '../layout/footer.js';
 import style from './style.less';
+import appInfo from '../../utils/app.js';
 
 export default class Home extends Component {
 

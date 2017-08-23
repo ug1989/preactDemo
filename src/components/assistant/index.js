@@ -6,7 +6,6 @@ import style from './style.less';
 
 import G from '!url-loader!../index/images/bg.jpg'
 
-import { touchScroll } from '../../utils/touchScroll.js'
 import { get, post } from '../../utils/http.js';
 import appInfo from '../../utils/app.js';
 
@@ -18,7 +17,13 @@ export default class Home extends Component {
     return (
       <Layout paddingApp={!true}>
         <Header paddingApp={!true} title="DISC" backUrl="/"></Header>
-        <div>
+        <div class={style.body + ' touch_scroll'}>
+          <img src={G} alt=""/>
+          <img src={G} alt=""/>
+          <img src={G} alt=""/>
+          <img src={G} alt=""/>
+          <img src={G} alt=""/>
+          <img src={G} alt=""/>
           <img src={G} alt=""/>
         </div>
         <Footer></Footer>

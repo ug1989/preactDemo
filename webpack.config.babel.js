@@ -2,39 +2,28 @@ import path from 'path';
 import webpack from 'webpack';
 import px2rem from 'postcss-px2rem';
 import autoprefixer from 'autoprefixer';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import ReplacePlugin from 'replace-bundle-webpack-plugin';
-import OfflinePlugin from 'offline-plugin';
 import DashboardPlugin from 'webpack-dashboard/plugin';
 import V8LazyParseWebpackPlugin from 'v8-lazy-parse-webpack-plugin';
 
-import { reqProxy } from './proxy.js';
-
-const forBuild = process.env.NODE_ENV === "production";
+const forBuild = 1 || process.env.NODE_ENV === "production";
 
 const htmlTplPlugin = new HtmlWebpackPlugin({
   template: './index.ejs',
-  title: 'Custom Title',
+  title: '巴比商城',
+  description: '美味与你分享',
   minify: {
-    collapseWhitespace: true,
-    minifyJS: true,
-    minifyCSS: true,
-    removeComments: true
+    collapseWhitespace: forBuild,
+    minifyJS: forBuild,
+    minifyCSS: forBuild,
+    removeComments: forBuild
   }
 });
 
-const extractCssPlugin = new ExtractTextPlugin({
-  filename: "[name].[contenthash:6].css",
-  disable: !forBuild
-});
-
 const copyFilePlugin = new CopyWebpackPlugin([{
-  from: './manifest.json',
-  to: './'
-}, {
   from: './favicon.ico',
   to: './'
 }, {
@@ -68,51 +57,24 @@ const devConfig = {
   historyApiFallback: true,
   disableHostCheck: true,
   proxy: {
-    '/api-*': {
-      // target: 'http://127.0.0.1:3000',
-      bypass: reqProxy
+    '/api-front': {
+      target: 'http://front.bestfood520.com',
+    },
+    '/favicon.ico' : {
+      target: 'http://front.bestfood520.com',
     }
   }
 };
 
-const offlinePlugin = new OfflinePlugin({
-  relativePaths: false,
-  AppCache: false,
-  excludes: ['_redirects'],
-  ServiceWorker: {
-    events: true
-  },
-  cacheMaps: [{
-    match: /.*/,
-    to: '/',
-    requestTypes: ['navigate']
-  }],
-  publicPath: '/'
-});
-
 const hiddenErrorPlugin = new ReplacePlugin([{
-  partten: /throw\s+(new\s+)?([a-zA-Z]+)?Error\s*\(/g, // partten: /throw\s+(new\s+)?[a-zA-Z]+Error\s*\(/g,
+  partten: /throw\s+(new\s+)?([a-zA-Z]+)?Error\s*\(/g,
   replacement: () => 'return;('
 }]);
 
-const matchRpx = new ReplacePlugin([{
-  partten: /(\d)rpx/g, // replace rpx => px
+const rpx2px = new ReplacePlugin([{
+  partten: /(\d)rpx/g,
   replacement: (a, b) => b + 'px'
 }]);
-
-const extractCssLoader = ExtractTextPlugin.extract({
-  use: [{
-    loader: "css-loader",
-    options: {
-      module: true
-    }
-  }, {
-    loader: "postcss-loader"
-  }, {
-    loader: "less-loader"
-  }],
-  fallback: "style-loader"
-});
 
 const px2remOption = {
   plugins: () => {
@@ -163,15 +125,13 @@ const webpackPlugins = forBuild ?
     copyFilePlugin,
     uglifyPlugin,
     hiddenErrorPlugin,
-    matchRpx,
-    offlinePlugin,
-    extractCssPlugin,
+    rpx2px,
     htmlTplPlugin
   ] :
   [
     new DashboardPlugin(),
     new V8LazyParseWebpackPlugin(),
-    matchRpx,
+    rpx2px,
     htmlTplPlugin
   ];
 

@@ -2,26 +2,16 @@
 import { h, Component } from 'preact';
 import { Router, route } from 'preact-router';
 import { createHashHistory } from 'history';
-import AsyncRoute from '../lib/asyncRoute';
+import AsyncRoute, {loadComponent} from '../lib/asyncRoute';
+import {touchScroll} from '../lib/touchScroll';
 
 import Index from './index';
 import './public/toast.js';
 
-// return function that load component lazy
-const getAssistant = () => System.import('./assistant');
-const getDiscovery = () => System.import('./discovery');
-const getProfile = () => System.import('./profile');
+// System.import return function can load component when execute
+const getProfile = () => System.import('./assistant');
+getProfile.cname = 'profile';
 
-// AsyncRoute will pass (location.pathname, setComponent) to loadComponentPromise
-const loadComponent = (getComponent) => {
-  return (url, cb) => {
-    getComponent().then(module => {
-      cb && cb({
-        component: module.default
-      });
-    });
-  }
-};
 
 const _loading = (hideLoading) => {
   const loadingDom = document.querySelector('.page_init_loading');
@@ -37,6 +27,7 @@ const _loading = (hideLoading) => {
 
 const hashHistory = createHashHistory();
 
+
 export default class App extends Component {
 
   handleRoute(e) {}
@@ -45,7 +36,13 @@ export default class App extends Component {
     let _push = hashHistory.push;
     hashHistory.push = (path, state) => {
       path != hashHistory.location.pathname && _push(path, state);
-    }
+    };
+
+    // optimize touchscroll
+    touchScroll(true);
+
+    // preload Components
+    // loadComponent(getProfile)();
   }
 
   render() {
@@ -53,28 +50,7 @@ export default class App extends Component {
       <Router history={hashHistory} onChange={this.handleRoute}>
         <Index default />
         <AsyncRoute path="/my" cname="profile" component={loadComponent(getProfile)} loading={_loading} />
-        <AsyncRoute path="/assistant" cname="assistant" component={loadComponent(getAssistant)} loading={_loading} />
-        <AsyncRoute path="/discovery" cname="discover" component={loadComponent(getDiscovery)} loading={_loading} />
-        <AsyncRoute path="/discovery/:id" cname="discover" component={loadComponent(getDiscovery)} loading={_loading} />
       </Router>
     );
   }
 }
-
-// 打包至同一文件
-// import Assistant from './assistant';
-// import Discovery from './discovery';
-// import Profile from './profile';
-// <Discovery path="/discovery" />
-// <Assistant path="/assistant" />
-// <Profile path="/my" />
-
-// preload components
-// setTimeout(() => {
-//   loadComponent(getDiscovery)('', () => {
-//     setTimeout(() => {
-//       loadComponent(getProfile)()
-//     }, 2000);
-//   });
-// }, 2000);
-// loadComponent(getAssistant)();
