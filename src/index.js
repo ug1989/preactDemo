@@ -1,4 +1,3 @@
-import reactDom from 'react-dom';
 import { h, render } from 'preact';
 
 let root;

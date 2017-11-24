@@ -1,5 +1,4 @@
-import { h } from 'preact';
-import { Component } from 'react';
+import { h, Component } from 'preact';
 import One from './One.js';
 import Two from './Two.js';
 

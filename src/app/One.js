@@ -3,6 +3,7 @@ import { hookComponent, watch, notify } from './hookComponent.js';
 import shareArr from './shareA.js';
 import shareObj from './shareB.js';
 
+@watch(shareArr)
 export default class One extends hookComponent {
 
   constructor() {
