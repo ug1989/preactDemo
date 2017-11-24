@@ -13,8 +13,8 @@ const forBuild = process.env.NODE_ENV === "production";
 
 const htmlTplPlugin = new HtmlWebpackPlugin({
   template: './index.ejs',
-  title: '巴比商城',
-  description: '美味与你分享',
+  title: 'ug-Test',
+  description: '...',
   minify: {
     collapseWhitespace: forBuild,
     minifyJS: forBuild,
@@ -60,10 +60,10 @@ const devConfig = {
   disableHostCheck: true,
   proxy: {
     '/api-front': {
-      target: 'http://front.bestfood520.com',
+      target: 'http://acc.zhangmen.com',
     },
     '/favicon.ico' : {
-      target: 'http://front.bestfood520.com',
+      target: 'http://bala.so',
     }
   }
 };
@@ -124,7 +124,7 @@ const extraCssloader = [{
 const webpackPlugins = forBuild ?
   [
     cleanPlugin,
-    copyFilePlugin,
+    // copyFilePlugin,
     uglifyPlugin,
     hiddenErrorPlugin,
     rpx2px,
@@ -190,8 +190,8 @@ module.exports = {
       'node_modules'
     ],
     alias: {
-      'react': 'preact-compat',
-      'react-dom': 'preact-compat',
+      // 'react': 'preact-compat',
+      // 'react-dom': 'preact-compat',
       'babel': 'babel-cli',
     }
   },
