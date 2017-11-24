@@ -12,11 +12,11 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    // this.timer = setInterval(() => {
-    //   this.setState({
-    //     showTwoNum: (this.state.showTwoNum % 4) + 1
-    //   });
-    // }, 300);
+    this.timer = setInterval(() => {
+      this.setState({
+        showTwoNum: (this.state.showTwoNum % 4) + 1
+      });
+    }, 1000);
   }
 
   componentWillUnmount() {
@@ -27,7 +27,8 @@ export default class Home extends Component {
     let showTwoNum = this.state.showTwoNum || 1;
     const Twos = [];
     while(showTwoNum--) {
-      Twos.push(<Two title={"SHAME".substr(showTwoNum)} />);
+      let _title = "SHAME".substr(showTwoNum);
+      Twos.push(<Two key={_title} title={_title} />);
     }
     return (
 				<div>

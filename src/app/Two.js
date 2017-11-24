@@ -4,6 +4,7 @@ import shareArr from './shareA.js';
 import shareObj from './shareB.js';
 
 @watch(shareObj)
+@watch(shareArr)
 export default class Two extends hookComponent {
 
   constructor() {
@@ -16,15 +17,14 @@ export default class Two extends hookComponent {
       notify(shareObj, () => {
         shareObj.name = 'test' + Math.random().toString(16).substr(8);
       });
-    }, 5000);
+    }, 3000);
   }
 
-  // @watch(shareArr)
-  render() {
-    console.log('render Two');
+  render(props) {
+    // console.log('render Two');
     return (
       <div>
-        {/* <h2>{this.props && this.props.title}</h2> */}
+        <h2>{props.title}</h2>
         <p>{`${shareArr.push(shareArr.length)} --- ${shareObj.name}`}</p>
       </div>
     );
