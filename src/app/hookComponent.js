@@ -6,7 +6,7 @@ const classWatchedData = {};    // data class care
 const dataWatched = [];         // all data watched
 const componentsDataCare = {};  // components data care
 
-// 用于释放 unmount 组件的渲染
+// 纪录依赖自身state之外需要更新的组件
 class hookComponent extends Component {
     constructor() {
         super()
@@ -17,7 +17,6 @@ class hookComponent extends Component {
             const dataIndex = dataWatched.indexOf(dataClassCare);
             if (dataIndex == -1) return;
             (componentsDataCare[dataIndex] = componentsDataCare[dataIndex] || []).push(this);
-            console.log(componentsDataCare[dataIndex].length);
         });
     }
     componentWillUnmount() {
@@ -31,12 +30,11 @@ class hookComponent extends Component {
             const thisIndex = componentsList.indexOf(this);
             if (thisIndex == -1) return;
             componentsList.splice(thisIndex, 1);
-            console.log(componentsList.length);
         });
     }
 }
 
-// 标记某个组件与那个变量绑定了
+// 标记组件构造器与依赖变量的关系，方便 hookComponent 安排依赖组建位置
 function watch(bindData) {
     dataWatched.indexOf(bindData) == -1 && dataWatched.push(bindData);
     return (classFn) => {
@@ -47,13 +45,14 @@ function watch(bindData) {
     }
 }
 
-// 通知绑定对应变量的组件更新
+// 通知变量更新，同步更新组件
 function notify(bindData, updaterFn) {
     updaterFn();
-    let bindDataIndex = dataWatched.indexOf(bindData);
-    const _hooks = componentsDataCare[bindDataIndex];
-    _hooks && _hooks.forEach(_this => {
-        _this.forceUpdate();
+    const dataIndex = dataWatched.indexOf(bindData);
+    if (dataIndex == -1) return;
+    const componentsList = componentsDataCare[dataIndex];
+    (componentsList || []).forEach(component => {
+        component.forceUpdate();
     });
 }
 

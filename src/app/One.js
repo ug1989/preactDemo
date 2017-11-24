@@ -6,24 +6,19 @@ import shareObj from './shareB.js';
 @watch(shareObj)
 @watch(shareArr)
 export default class One extends hookComponent {
-
-  constructor() {
-    super();
-    this.aa = 123;
-  }
-
   componentDidMount() {
-    setInterval(() => {
+    this.timer = setInterval(() => {
       notify(shareArr, () => {
         shareArr.push(Math.random());
       });
     }, 1700);
   }
 
-  // @watch(shareArr)
-  // @watch(shareObj)
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
   render() {
-    // console.log('render One');
     return (
       <div>
         <h2>One Here</h2>
