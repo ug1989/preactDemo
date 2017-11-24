@@ -16,7 +16,7 @@ export default class Home extends Component {
       this.setState({
         showTwoNum: (this.state.showTwoNum % 4) + 1
       });
-    }, 1000);
+    }, 900);
   }
 
   componentWillUnmount() {

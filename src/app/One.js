@@ -17,7 +17,7 @@ export default class One extends hookComponent {
       notify(shareArr, () => {
         shareArr.push(Math.random());
       });
-    }, 2000);
+    }, 1700);
   }
 
   // @watch(shareArr)

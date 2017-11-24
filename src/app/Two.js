@@ -3,6 +3,8 @@ import { hookComponent, watch, notify } from './hookComponent.js';
 import shareArr from './shareA.js';
 import shareObj from './shareB.js';
 
+let i = 0;
+
 @watch(shareObj)
 @watch(shareArr)
 export default class Two extends hookComponent {
@@ -15,9 +17,9 @@ export default class Two extends hookComponent {
   componentDidMount() {
     setInterval(() => {
       notify(shareObj, () => {
-        shareObj.name = 'test' + Math.random().toString(16).substr(8);
+        shareObj.name = 'test' + ++i;
       });
-    }, 3000);
+    }, 1300);
   }
 
   render(props) {
