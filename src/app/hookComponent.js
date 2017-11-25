@@ -11,27 +11,27 @@ class hookComponent extends Component {
     constructor() {
         super()
         const clasIndex = decoratorClassList.indexOf(this.constructor);
-        if (clasIndex == -1) 
+        if (clasIndex == -1)
             return;
         classWatchedData[clasIndex].forEach(dataClassCare => {
             const dataIndex = dataWatched.indexOf(dataClassCare);
-            if (dataIndex == -1) 
+            if (dataIndex == -1)
                 return;
-            
+
             (componentsDataCare[dataIndex] = componentsDataCare[dataIndex] || []).push(this);
         });
     }
     componentWillUnmount() {
         const clasIndex = decoratorClassList.indexOf(this.constructor);
-        if (clasIndex == -1) 
+        if (clasIndex == -1)
             return;
         classWatchedData[clasIndex].forEach(dataClassCare => {
             const dataIndex = dataWatched.indexOf(dataClassCare);
-            if (dataIndex == -1) 
+            if (dataIndex == -1)
                 return;
             const componentsList = componentsDataCare[dataIndex];
             const thisIndex = componentsList.indexOf(this);
-            if (thisIndex == -1) 
+            if (thisIndex == -1)
                 return;
             componentsList.splice(thisIndex, 1);
         });
@@ -62,13 +62,13 @@ function watch(bindData) {
 function notify(bindData, updaterFn) {
     updaterFn();
     const dataIndex = dataWatched.indexOf(bindData);
-    if (dataIndex == -1) 
+    if (dataIndex == -1)
         return;
     const componentsList = componentsDataCare[dataIndex];
     (componentsList || []).forEach(component => {
         component.forceUpdate();
     });
-    console.log(bindData.name || bindData.length, componentsList.length)
+    console.log(bindData.name ? 'shareA' || 'shareB', componentsList.length)
 }
 
 // 设置hookComponent为watchedComponent的原型组件
