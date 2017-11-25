@@ -23,6 +23,14 @@ export default class Home extends Component {
   componentDidMount() {
     pullLimitH = parseInt(getComputedStyle(this.refs.header.base).height);
     this.initData();
+    this.timer = setInterval(() => {
+      appInfo.title = `${Math.random()}`.substr(3, 3);
+      notify(appInfo);
+    }, 700);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
   }
 
   pullLoading(touchMoveY) {
@@ -41,6 +49,7 @@ export default class Home extends Component {
       onLoading: false,
       loadingTop: -limitY
     };
+
     // touchend
     if (touchMoveY === null) {
       overLimit && this.setState(showLoadingState);
@@ -51,9 +60,6 @@ export default class Home extends Component {
     }
     // scale touchmove in 1/3
     const scaleY = vectorY / 3;
-    notify(appInfo.share, () => {
-      appInfo.share.title = scaleY;
-    });
     this.pullLoading.lastVectorY = scaleY > limitY ? limitY : scaleY;
     this.setState({
       showLoading: true,
@@ -64,9 +70,9 @@ export default class Home extends Component {
 
   initData(callback) {
     get('http://bala.so/wxapp/freeGame').then((res) => {
-      console.log(res);
+      // console.log(res);
       post('/api-front/session/create?device=web&version=1.0.0&sessionId=', {}, 'text').then((res) => {
-        console.log(res);
+        // console.log(res);
         callback && callback();
       });
     });
@@ -95,8 +101,8 @@ export default class Home extends Component {
     };
 
     return (
-      <Layout paddingApp={true}>
-        <Header paddingApp={true} title="COMM" ref={_dom => this.refs.header = _dom}></Header>
+      <Layout paddingApp={!true}>
+        <Header paddingApp={!true} title="COMM" ref={_dom => this.refs.header = _dom}></Header>
         <div style={loadingStyleContainer} class={style.refresh} ref={_dom => this.refs.refreshDom = _dom}>
           <div class={style.inner} style={loadingStyleInner}>❅</div>
         </div>

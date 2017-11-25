@@ -13,8 +13,8 @@ const forBuild = process.env.NODE_ENV === "production";
 
 const htmlTplPlugin = new HtmlWebpackPlugin({
   template: './index.ejs',
-  title: '巴比商城',
-  description: '美味与你分享',
+  title: 'demo',
+  description: 'dec..',
   minify: {
     collapseWhitespace: forBuild,
     minifyJS: forBuild,

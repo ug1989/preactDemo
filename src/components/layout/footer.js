@@ -5,7 +5,6 @@ import style from './footer.less';
 import { watch, notify } from '../../lib/hookComponent.js';
 import appInfo from '../../utils/app.js';
 
-
 const hookSelector = '.bodyHookAnchor';
 const hookDom = document.querySelector(hookSelector);
 
@@ -24,7 +23,7 @@ const SubMenu = ({ open }) => {
   return open ? portalMenu : null;
 };
 
-@watch(appInfo.state)
+@watch(appInfo)
 export default class Footer extends Component {
 
   constructor() {
@@ -57,11 +56,12 @@ export default class Footer extends Component {
   }
 
   render({ }, { showInnerMenu }) {
+
     return (
       <div class={style.footer}>
         <div onClick={this.routePath.bind(this, '/')}>Ho</div>
         <div onClick={this.routePath.bind(this, '/discovery')}>Dis</div>
-        <div onClick={this.toggleInnerMenu.bind(this)}>{appInfo.state.name}</div>
+        <div onClick={this.toggleInnerMenu.bind(this)}>{appInfo.index || '0'}</div>
         <div onClick={this.routePath.bind(this, '/assistant')}>Ass</div>
         <div onClick={this.routePath.bind(this, '/my')}>My</div>
         <SubMenu open={showInnerMenu} />

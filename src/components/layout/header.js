@@ -4,7 +4,7 @@ import style from './header.less';
 import { watch, notify } from '../../lib/hookComponent.js';
 import appInfo from '../../utils/app.js';
 
-@watch(appInfo.state)
+@watch(appInfo)
 export default class Header extends Component {
 
   componentDidMount() {
@@ -16,7 +16,7 @@ export default class Header extends Component {
   }
 
   render({ paddingApp, title, backUrl, ref }) {
-
+    
     const headerClass = [
       style.header,
       paddingApp && style.paddingApp || ''
@@ -25,7 +25,7 @@ export default class Header extends Component {
     return (
       <div class={headerClass} ref={ref} onClick={() => { location.reload() }}>
         <div class={style.back}></div>
-        {title || appInfo.state.title}
+        {appInfo.title || title}
       </div>
     );
   }
