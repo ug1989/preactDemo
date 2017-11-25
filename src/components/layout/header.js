@@ -1,7 +1,10 @@
 import { h, Component } from 'preact';
 import { route } from 'preact-router';
 import style from './header.less';
+import { watch, notify } from '../../lib/hookComponent.js';
+import appInfo from '../../utils/app.js';
 
+@watch(appInfo.state)
 export default class Header extends Component {
 
   componentDidMount() {
@@ -22,7 +25,7 @@ export default class Header extends Component {
     return (
       <div class={headerClass} ref={ref} onClick={() => { location.reload() }}>
         <div class={style.back}></div>
-        {title || 'click to reload'}
+        {title || appInfo.state.title}
       </div>
     );
   }

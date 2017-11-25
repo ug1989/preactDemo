@@ -4,6 +4,7 @@ import Header from '../layout/header.js';
 import Footer from '../layout/footer.js';
 import style from './style.less';
 
+import { watch, notify } from '../../lib/hookComponent.js';
 import { get, post } from '../../utils/http.js';
 import appInfo from '../../utils/app.js';
 
@@ -50,6 +51,9 @@ export default class Home extends Component {
     }
     // scale touchmove in 1/3
     const scaleY = vectorY / 3;
+    notify(appInfo.share, () => {
+      appInfo.share.title = scaleY;
+    });
     this.pullLoading.lastVectorY = scaleY > limitY ? limitY : scaleY;
     this.setState({
       showLoading: true,
