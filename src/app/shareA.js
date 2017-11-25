@@ -1,3 +1,3 @@
-var shareArr = [123];
+var shareArr = [];
 
 export default shareArr;

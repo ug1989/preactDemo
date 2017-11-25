@@ -16,7 +16,7 @@ export default class Home extends Component {
       this.setState({
         showTwoNum: (this.state.showTwoNum % 4) + 1
       });
-    }, 6700);
+    }, 3400);
   }
 
   componentWillUnmount() {
@@ -28,7 +28,7 @@ export default class Home extends Component {
     const Twos = [];
     while(showTwoNum--) {
       let _title = "SHAME".substr(showTwoNum);
-      Twos.push(<Two key={_title} title={_title} />);
+      Twos.push(<Two key={_title} title={_title} index={showTwoNum} />);
     }
     return (
 				<div>

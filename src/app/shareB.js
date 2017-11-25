@@ -1,3 +1,3 @@
-var shareObj = {name: 'HAHA'};
+var shareObj = {name: 'initName'};
 
 export default shareObj;
