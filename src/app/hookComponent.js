@@ -68,7 +68,7 @@ function notify(bindData, updaterFn) {
     (componentsList || []).forEach(component => {
         component.forceUpdate();
     });
-    console.log(bindData.name ? 'shareA' || 'shareB', componentsList.length)
+    console.log(bindData.name ? '{}' : '[]', componentsList.length)
 }
 
 // 设置hookComponent为watchedComponent的原型组件
