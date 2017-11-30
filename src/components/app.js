@@ -6,10 +6,12 @@ import AsyncRoute, {loadComponent} from '../lib/asyncRoute';
 import {touchScroll} from '../lib/touchScroll';
 
 import Index from './index';
+import Assistant from './assistant';
+import Discovery from './discovery';
 import './public/toast.js';
 
 // System.import return function can load component when execute
-const getProfile = () => System.import('./assistant');
+const getProfile = () => System.import('./profile');
 getProfile.cname = 'profile';
 
 
@@ -49,6 +51,8 @@ export default class App extends Component {
     return (
       <Router history={hashHistory} onChange={this.handleRoute}>
         <Index default />
+        <Discovery path="/discovery" />
+        <Assistant path="/assistant" />
         <AsyncRoute path="/my" cname="profile" component={loadComponent(getProfile)} loading={_loading} />
       </Router>
     );

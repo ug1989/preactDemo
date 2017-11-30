@@ -1,6 +1,6 @@
 {
   "sourceMaps": true,
-  "compact": true,
+  "compact": "auto",
   "presets": [
     [
       "es2015",

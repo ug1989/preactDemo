@@ -25,7 +25,7 @@ export default class Header extends Component {
     return (
       <div class={headerClass} ref={ref} onClick={() => { location.reload() }}>
         <div class={style.back}></div>
-        {appInfo.title || title}
+        {appInfo.title || appInfo.badMsg || title}
       </div>
     );
   }

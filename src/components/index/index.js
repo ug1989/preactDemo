@@ -26,7 +26,7 @@ export default class Home extends Component {
     this.timer = setInterval(() => {
       appInfo.title = `${Math.random()}`.substr(3, 3);
       notify(appInfo);
-    }, 700);
+    }, 60);
   }
 
   componentWillUnmount() {
